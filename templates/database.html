@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <style>
+         body {
+           background-image: url('/static/background.jpg');
+         }
+      </style> 
+
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+      <link rel= "stylesheet" type= "text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+
+      <title>Clinical Diabetes Support</title>
+      <link rel="icon" type="image/png" href="/static/logo.png"/>
+
+   </head>
+
+   <body>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <a class="navbar-brand" href="#">Clinical Diabetes Support <img src="/static/logo.png" id="logo"></a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+               <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="predict">Predict</a>
+            </li>
+            <li class="nav-item active">
+               <a class="nav-link" href="database">Database<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="aboutme">About Me</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link"></a>
+            </li>
+            <form class="form-inline my-2 my-lg-0">
+               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+         </div>
+      </nav>
+
+      <br>
+      <div class="jumbotron jumbotron-fluid">
+         <h2>Previous Entries: </h2>
+         <br>
+         <div class="container-fluid">
+            <table class="table table-striped table-light" id="databaseTable">
+               <thead class="thead-dark">
+               <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Age</th>
+                  <th scope="col"># of Pregnancies</th>
+                  <th scope="col">Glucose Level</th>
+                  <th scope="col">Blood Pressure</th>
+                  <th scope="col">Skin Thickness</th>
+                  <th scope="col">Insulin</th>
+                  <th scope="col">BMI</th>
+                  <th scope="col">Diabetes Pedigree</th>
+                  <th scope="col">Predicted Diabetes</th>
+               </tr>
+               </thead>
+               <tbody>
+                  
+                  {% block content %}
+                  {% for record in records %}
+
+                  
+                  <tr>
+                     <th scope="row">{{ loop.index }}</th>
+                     <td>{{ record['first_name'] }}</td>
+                     <td>{{ record['last_name'] }}</td>
+                     <td>{{ record['age'] }}</td>
+                     <td>{{ record['pregnancies'] }}</td>
+                     <td>{{ record['glucose'] }}</td>
+                     <td>{{ record['blood_pressure'] }}</td>
+                     <td>{{ record['skin_thickness'] }}</td>
+                     <td>{{ record['insulin'] }}</td>
+                     <td>{{ record['bmi'] }}</td>
+                     <td>{{ record['diabetes_pedigree'] }}</td>
+                     <td>{{ record['outcome'] }}</td>
+                  </tr>
+                  
+                  {% endfor %}
+                  {% endblock %}
+
+               </tbody>
+            </table>
+         </div>
+      </div>
+
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+        
+      <script type=text/javascript>
+         $(document).ready(function () {
+            $('#databaseTable').DataTable();
+         });
+      </script>
+   </body>
+</html>
+

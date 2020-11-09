@@ -1,0 +1,74 @@
+#logo{
+    width: 45px;
+    height: 45px; 
+}
+
+#homeSection{
+    text-align: center;
+}
+
+#homeSectionImage{
+    max-width: 600px;
+    max-height: 600px;
+    text-align: center;
+}
+
+#homeSectionImage{
+    max-width: 1200px;
+    max-height: 1200px;
+    text-align: center;
+}
+
+#avatar{
+    height: 500px;
+    width: auto;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+  bottom: .5em;
+}
+
+.carousel {
+    position: relative;
+}
+
+.carousel-caption {
+    position: absolute;
+    background: rgba(0,0,0,0.4);
+    padding: 15px 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.container-fluid {
+	background:url(http://namhah.com/images/1.jpg);
+  margin-top: 100px;
+}
+
+.panel-transparent {
+	background: none;
+}
+
+.panel-transparent .panel-heading{
+    background: rgba(122, 130, 136, 0.2)!important;
+}
+
+.panel-transparent .panel-body{
+    background: rgba(46, 51, 56, 0.2)!important;
+}
+
+#result {
+    font-size: 100px;
+  }

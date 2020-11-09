@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <style>
+         body {
+           background-image: url('/static/background.jpg');
+         }
+      </style> 
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+      <title>Clinical Diabetes Support</title>
+      <link rel="icon" type="image/png" href="/static/logo.png"/>
+   </head>
+
+   <body>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <a class="navbar-brand" href="#">Clinical Diabetes Support <img src="/static/logo.png" id="logo"></a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="predict">Predict</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="database">Database</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="aboutme">About Me</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link"></a>
+            </li>
+            <form class="form-inline my-2 my-lg-0">
+               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+         </div>
+      </nav>
+
+      <br>
+
+      <div class="jumbotron">
+         <h1 class="display-4" id="homeSection">CDS Application</h1>
+         
+         <p class="my-2" id="homeSection" >Welcome to my Clinical Decision Support system<br>
+            To use this click on the predict tab and fill in a small survey about yourself.<br>
+            Upon completion my machine learning algorithm will take that information and make a prediction about your diabetes.<br>
+            After recieving the result the support system will recommend some resources to help.<br>
+            You are welcome to view all past inputs to see how others compare.<br>
+            There is also an about me section in case you wish to see that.<br>
+            The machine learning algorithm is further explained below and I go through the dataset I trained it on.</p>
+
+         <hr>
+
+         <h1 class="display-4" id="homeSection">Dataset</h1>
+         <p class="lead" id="homeSection">The dataset I used is the Pima Indians Diabetes Database dataset on kaggle.</p>
+         <p class="my-2" id="homeSection" ><a href="https://www.kaggle.com/uciml/pima-indians-diabetes-database">https://www.kaggle.com/uciml/pima-indians-diabetes-database</a><br>
+            It was collected from the National Institute of Diabetes and Digestive and Kindey Diseases.<br></p>
+         <br><br>
+         <h1 class="display-6" id="homeSection">Features</h1>
+         <div class="text-center"><img src="/static/dataset_features.png " class="img-fluid" alt="Responsive image" id="homeSection"></div>
+         <br>
+         <h1 class="display-6" id="homeSection">Base Statistics</h1>
+         <div class="text-center"><img src="/static/dataset_statistics.png " class="img-fluid" alt="Responsive image" id="homeSection"></div>
+         <br>
+         <hr>
+
+         <h1 class="display-4" id="homeSection">Algorithms</h1>
+         <p class="lead" id="homeSection">The algorithm I settled on for this project is the Random Forest Classifier.</p>
+         <br>
+         <div class="text-center"><img src="/static/random_forest.bmp " class="img-fluid" alt="Responsive image" id="homeSectionImage"></div>
+         <br>
+         <h1 class="display-6" id="homeSection">PreProcessing</h1>
+         <p class="my-2" id="homeSection" >Preprocessing this data was pretty straight forward.<br>
+            The main thing that needed to be done was fill in missing values. Many columns had 0s even if it made no sense for there to be a 0.<br>
+            For example Glucose and Blood Pressure both had 0s and if either of those were true the patient would be dead.<br>
+            To impute the missing values I used a K-nearest Neighbor imputer.<br>
+            K-nearest Neighbor imputers work by searching for the datapoint closest to the one with missing data and using the new data point's data to fill in the missing values<br></p>  
+         <br>
+         <p class="my-2" id="homeSection" >All variables already came in the correct data type so no conversions needed to be made.<br>
+            All algorithms tested below do not require feature scaling so that did not need to be done.<br>
+            This concludes my preprocessing.<br></p>
+         <br>
+         <h1 class="display-6" id="homeSection">Choosing the algorithm</h1>
+         <p class="my-2" id="homeSection" >A random forest is an ensemble classifier which means it uses multiple models to make a single, more accurate, predictions.<br>
+            Random forests create several decision trees and uses the average of their predictions to make a unified prediction.<br>
+            In order to ensure that not every tree is the same, each tree sees a subsection of the data and the hope is this balances out the bias in the system.<br>
+            Prior to tuning hyperparameters this algorithm was the best performer<br>
+            Other algorithms attempted include: Naive Bayes, Decision Trees alone, Logistic Regression, and Linear Discriminant Analysis<br>
+            The evaluation metrics used were Accuracy, F1-score, Precision, Recall, and AOC</p>
+
+            <table class="table">
+               <thead class="thead-dark">
+                 <tr>
+                   <th scope="col">Algorithm</th>
+                   <th scope="col">Confusion Matrix</th>
+                   <th scope="col">ROC curve</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <th scope="row">Naive Bayes</th>
+                   <td><img src="/static/naive_bayes_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                   <td><img src="/static/naive_bayes_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                 </tr>
+                 <tr>
+                   <th scope="row">Logistic Regression</th>
+                   <td><img src="/static/logistic_regression_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                   <td><img src="/static/logistic_regression_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                 </tr>
+                 <tr>
+                   <th scope="row">Decision Tree</th>
+                   <td><img src="/static/decision_tree_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                   <td><img src="/static/decision_tree_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                 </tr>
+                 <tr>
+                  <th scope="row">Linear Discriminant Analysis</th>
+                  <td><img src="/static/linear_discriminant_analysis_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                  <td><img src="/static/linear_discriminant_analysis_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Random Forest</th>
+                  <td><img src="/static/random_forest_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                  <td><img src="/static/random_forest_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                </tr>
+               </tbody>
+             </table>
+
+            <hr>
+            <br>
+            <h3 class="display-6" id="homeSection">The Decision Tree</h1>
+            <br>
+            <div class="text-center"><img src="/static/decision_tree.dot.png " class="img-fluid" alt="Responsive image" id="homeSectionImage2"></div>
+            <br>
+            <p class="my-2" id="homeSection" >As mentioned above a random forest is just a collection of decision trees.<br>
+            Decision trees are models that are followed by branching the choices based on what decreases entropy the most. <br>
+            Entropy is the measure of disorder in a system. In other words it makes a decision based on what adds the most certainty to a problem.<br>
+            Another way to look at that is to ask what choice could we make that gives us the most new information<br>
+            This model has one huge advantage compared to other models, especially in the healthcare industry!<br>
+            It avoids the black box phenomina since every choice it makes is directly understandable to a human.<br>
+            Looking at the above tree example that is in our Random Forest it is possible to follow the logic in a case by case basis.</p>
+            <hr>
+            <div class="text-center"><a class="btn btn-primary btn-lg" href="predict" role="button">Make a Prediction</a></div>
+         </p>
+       </div>
+
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   </body>
+</html>
+
