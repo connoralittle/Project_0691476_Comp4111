@@ -53,20 +53,30 @@
       <div class="jumbotron">
          <h1 class="display-4" id="homeSection">CDS Application</h1>
          
-         <p class="my-2" id="homeSection" >Welcome to my Clinical Decision Support system<br>
-            To use this click on the predict tab and fill in a small survey about yourself.<br>
-            Upon completion my machine learning algorithm will take that information and make a prediction about your diabetes.<br>
+            <hr>
+            <p class="my-2" id="homeSection" >Welcome to my Clinical Decision Support system<br>
+            To use this system please click on the predict tab and fill in a small survey about yourself.<br>
+            Upon completion my machine learning algorithm will take that information and make a prediction about whether you have diabetes or not.<br>
             After recieving the result the support system will recommend some resources to help.<br>
+            From these pages just click on the header to return back to the main pages. <br>
             You are welcome to view all past inputs to see how others compare.<br>
-            There is also an about me section in case you wish to see that.<br>
-            The machine learning algorithm is further explained below and I go through the dataset I trained it on.</p>
+            This functionality is found underneath the database header. <br>
+            From here you will find a table of all previous entries. <br>
+            You can sort and search this table to your hearts desire. <br>
+            Under Predicted Diabetes a 0.0 means negative and a 1.0 means positive. <br>
+            There is also an about me section in case you wish to see learn about me.<br>
+            The machine learning algorithm is further explained below and I go through the dataset I trained it on.<br>
+            At the bottom is a link to the predict page to try it out for yourself. <br></p>
 
          <hr>
 
          <h1 class="display-4" id="homeSection">Dataset</h1>
          <p class="lead" id="homeSection">The dataset I used is the Pima Indians Diabetes Database dataset on kaggle.</p>
          <p class="my-2" id="homeSection" ><a href="https://www.kaggle.com/uciml/pima-indians-diabetes-database">https://www.kaggle.com/uciml/pima-indians-diabetes-database</a><br>
-            It was collected from the National Institute of Diabetes and Digestive and Kindey Diseases.<br></p>
+            The data collected from the National Institute of Diabetes and Digestive and Kindey Diseases.<br>
+            The dataset was published by in the UCI Machine Learning Repository.<br>
+            This dataset is a subset of a larger dataset of diabetes and is solely made up of 21+ year old females who are Pima Indian<br>
+            The goal of this project is to determine whether a person has diabetes based on a limited number of questions.</p>
          <br><br>
          <h1 class="display-6" id="homeSection">Features</h1>
          <div class="text-center"><img src="/static/dataset_features.png " class="img-fluid" alt="Responsive image" id="homeSection"></div>
@@ -93,12 +103,23 @@
             This concludes my preprocessing.<br></p>
          <br>
          <h1 class="display-6" id="homeSection">Choosing the algorithm</h1>
-         <p class="my-2" id="homeSection" >A random forest is an ensemble classifier which means it uses multiple models to make a single, more accurate, predictions.<br>
+         <p class="my-2" id="homeSection" >A random forest is an ensemble classifier which means it uses multiple models to make a single, more accurate, prediction.<br>
+            These models all make individual predictions and then use voting or averaging techniques to come to a consensus.<br>
             Random forests create several decision trees and uses the average of their predictions to make a unified prediction.<br>
             In order to ensure that not every tree is the same, each tree sees a subsection of the data and the hope is this balances out the bias in the system.<br>
-            Prior to tuning hyperparameters this algorithm was the best performer<br>
-            Other algorithms attempted include: Naive Bayes, Decision Trees alone, Logistic Regression, and Linear Discriminant Analysis<br>
-            The evaluation metrics used were Accuracy, F1-score, Precision, Recall, and AOC</p>
+
+            In order to choose what algorithm would preform the best I had to use cross validation.<br>
+            Cross validation is a technique that involves seperating the data into N folds and training on all but 1 and testing on the remainder. <br>
+            This process is repeated until every subset has had a turn being the remainder.<br>
+            I used a special version of K-fold cross validation called Stratified Cross Validation. This ensures that every subset has a proportional number of diabetes cases to non-diabetes cases.<br>
+            The other algorithms attempted include: Naive Bayes, Decision Trees alone, Logistic Regression, and Linear Discriminant Analysis<br>
+            The evaluation metrics used were Accuracy, F1-score, Precision, Recall, Confusion Matrices, and AUC<br>
+            These metrics were calculated as the average result over each fold. <br>
+            After conducting my cross validation I determined that the random forest is the best algorithm to choose. <br>
+            It preformed very well in most metrics, only being beaten out my linear discriminant analysis in some.<br>
+            However it does have the advantage of being a simpler algorithm that is interpretable by doctors.<br>
+            This is very important in the health care field as medical staff should know why they are making the decisions they do.<br>
+            After cross validation has been completed I then trained my model and performed hyper parameter tuning to create the most accurate model possible. <br><br> </p>
 
             <table class="table">
                <thead class="thead-dark">
@@ -106,6 +127,7 @@
                    <th scope="col">Algorithm</th>
                    <th scope="col">Confusion Matrix</th>
                    <th scope="col">ROC curve</th>
+                   <th scope="col">Classification Reports</th>
                  </tr>
                </thead>
                <tbody>
@@ -113,26 +135,31 @@
                    <th scope="row">Naive Bayes</th>
                    <td><img src="/static/naive_bayes_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                    <td><img src="/static/naive_bayes_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                   <td><img src="/static/naive_bayes_cr.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                  </tr>
                  <tr>
                    <th scope="row">Logistic Regression</th>
                    <td><img src="/static/logistic_regression_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                    <td><img src="/static/logistic_regression_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                   <td><img src="/static/logistic_regression_cr.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                  </tr>
                  <tr>
                    <th scope="row">Decision Tree</th>
                    <td><img src="/static/decision_tree_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                    <td><img src="/static/decision_tree_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                   <td><img src="/static/decision_tree_cr.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                  </tr>
                  <tr>
                   <th scope="row">Linear Discriminant Analysis</th>
                   <td><img src="/static/linear_discriminant_analysis_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                   <td><img src="/static/linear_discriminant_analysis_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                  <td><img src="/static/linear_discriminant_analysis_cr.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                 </tr>
                 <tr>
                   <th scope="row">Random Forest</th>
                   <td><img src="/static/random_forest_cm.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                   <td><img src="/static/random_forest_roc.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
+                  <td><img src="/static/random_forest_cr.png " class="img-fluid" alt="Responsive image" id="homeSectionImage"></td>
                 </tr>
                </tbody>
              </table>

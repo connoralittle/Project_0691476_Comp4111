@@ -58,60 +58,71 @@
                 <div class="col-sm-10">
                   <input type="string" class="form-control" name="firstInput" value="Jane">
                 </div>
+                <p id="explanation"></p>Your given name</p>
               </div>
               <div class="form-group row">
                 <label for="lastInput" class="col-sm-2 col-form-label">Last Name</label>
                 <div class="col-sm-10">
                   <input type="string" class="form-control" name="lastInput" value="Doe">
                 </div>
+                <p id="explanation"></p>Your last name</p>
               </div>
                <div class="form-group row">
                  <label for="ageInput" class="col-sm-2 col-form-label">Age</label>
                  <div class="col-sm-10">
                    <input type="number" class="form-control" name="ageInput" min=0 max=150 value=0>
                  </div>
+                 <p id="explanation"></p>Your age</p>
                </div>
                <div class="form-group row">
                   <label for="pregnancyInput" class="col-sm-2 col-form-label"># of Pregnancies</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" name="pregnancyInput" min=0 max=100 value=0>
                   </div>
+                  <p id="explanation"></p>Number of times pregnant</p>
                 </div>
                 <div class="form-group row">
                   <label for="glucoseInput" class="col-sm-2 col-form-label">Glucose Level</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" name="glucoseInput" min=0 max=1000 value=0>
                   </div>
+                  <p id="explanation"></p>Plasma glucose concentration a 2 hours in an oral glucose tolerance test</p>
                 </div>
                 <div class="form-group row">
                   <label for="bpInput" class="col-sm-2 col-form-label">Blood Pressure</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" name="bpInput" min=0 max=200 value=0>
                   </div>
+                  <p id="explanation"></p>Diastolic blood pressure (mm Hg)</p>
                 </div>
                 <div class="form-group row">
                   <label for="stInput" class="col-sm-2 col-form-label">Skin Thickness</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" name="stInput" min=0 max=200 value=0>
                   </div>
+                  <p id="explanation"></p>Triceps skin fold thickness (mm)</p>
                 </div>
                 <div class="form-group row">
                   <label for="insulinInput" class="col-sm-2 col-form-label">Insulin Level</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" name="insulinInput" min=0 max=1000 value=0>
                   </div>
+                  <p id="explanation"></p>2-Hour serum insulin (mu U/ml)</p>
                 </div>
                 <div class="form-group row">
                   <label for="bmiInput" class="col-sm-2 col-form-label">BMI</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" name="bmiInput" step=0.1 min=0 max=100 value=0>
                   </div>
+                  <p id="explanation">Body mass index (weight in kg/(height in m)^2)</p>
                 </div>
                 <div class="form-group row">
                   <label for="dpInput" class="col-sm-2 col-form-label">Diabetes Pedigree</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" name="dpInput" step=0.001 min=0 max=1 value=0>
                   </div>
+                  <p id="explanation"></p>Diabetes pedigree function</p>
+                  <div class="text-center" id="explanation"><img src="/static/diabetes_pedigree.png " class="img-fluid" alt="Responsive image" id="homeSection"></div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
              </form>
